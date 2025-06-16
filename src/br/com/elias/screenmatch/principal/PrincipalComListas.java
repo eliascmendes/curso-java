@@ -4,9 +4,7 @@ import br.com.elias.screenmatch.modelos.Filme;
 import br.com.elias.screenmatch.modelos.Serie;
 import br.com.elias.screenmatch.modelos.Titulo;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 public class PrincipalComListas {
     public static void main(String[] args) {
@@ -36,7 +34,7 @@ public class PrincipalComListas {
     }
 
 
-    ArrayList<String> buscaPorArtista = new ArrayList<>();
+    List<String> buscaPorArtista = new LinkedList<>();
     buscaPorArtista.add("Ana De Armas");
     buscaPorArtista.add("Elias");
     buscaPorArtista.add("MijorButMajor");
