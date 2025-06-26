@@ -1,6 +1,9 @@
 package br.com.elias.screenmatch.principal;
 import br.com.elias.screenmatch.modelos.Titulo;
+import br.com.elias.screenmatch.modelos.TituloOmdb;
+import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.net.URI;
@@ -24,9 +27,12 @@ public class PrincipalComBusca {
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
         String json = response.body();
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
 
-        Titulo titulo = gson.fromJson(response.body(), Titulo.class);
-        System.out.println(titulo);
+        TituloOmdb tituloOmdb = gson.fromJson(response.body(), TituloOmdb.class);
+        System.out.println(tituloOmdb);
+        Titulo meutitulo = new Titulo(tituloOmdb);
+        System.out.println("titulo ja convertido");
+        System.out.println(meutitulo);
     }
 }
