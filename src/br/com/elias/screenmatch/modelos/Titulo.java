@@ -1,5 +1,6 @@
 package br.com.elias.screenmatch.modelos;
 
+import br.com.elias.screenmatch.excecao.ErroDeConversaoException;
 import com.google.gson.annotations.SerializedName;
 
 public class Titulo implements Comparable<Titulo> {
@@ -19,8 +20,12 @@ public class Titulo implements Comparable<Titulo> {
         this.anoDeLancamento = anoDeLancamento;
     }
 
-    public Titulo(TituloOmdb titulo) {
+    public Titulo(TituloOmdb titulo) throws ErroDeConversaoException {
         this.nome = titulo.title();
+
+        if (titulo.year().length() > 4) {
+            throw new ErroDeConversaoException("Não consegui conveter  o ano. Porque tem mais de 04 caracteres.");
+        }
         this.anoDeLancamento = Integer.valueOf(titulo.year());
         this.duracaoEmMinutos = Integer.valueOf(titulo.runtime().substring(0,2));
     }
