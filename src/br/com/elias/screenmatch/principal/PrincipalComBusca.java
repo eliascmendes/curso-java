@@ -20,18 +20,18 @@ public class PrincipalComBusca {
         var busca = leitura.nextLine();
 
         String endereco = "https://www.omdbapi.com/?t=" + busca + "&apikey=65a969fa";
-
+try {
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder().uri(URI.create(endereco)).build();
 
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+    HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         System.out.println(response.body());
         String json = response.body();
         Gson gson = new GsonBuilder().setFieldNamingPolicy(FieldNamingPolicy.UPPER_CAMEL_CASE).create();
 
         TituloOmdb tituloOmdb = gson.fromJson(response.body(), TituloOmdb.class);
         System.out.println(tituloOmdb);
-        try {
+     //   try {
         Titulo meutitulo = new Titulo(tituloOmdb);
         System.out.println("titulo ja convertido");
         System.out.println(meutitulo);
@@ -39,7 +39,11 @@ public class PrincipalComBusca {
         } catch (NumberFormatException e) {
             System.out.println("Aconteceu um erro: ");
             System.out.println(e.getMessage());
-        }
+        } catch (IllegalArgumentException e) {
+    System.out.println("Aconteceu algo, não sei o que ");
+} catch (Exception e) {
+    System.out.println("Aconteceu algo, não sei o que. Esse erro não estava sendo esperado.");
+}
 
         System.out.println("O programa finalizou corretamente.");
     }
